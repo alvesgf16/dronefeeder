@@ -26,6 +26,11 @@ public class DeliveryService {
   }
 
   @Transactional
+  public Delivery create(Delivery delivery) {
+    return repository.save(delivery);
+  }
+
+  @Transactional
   public Delivery update(int id, DeliveryDto delivery) {
     Delivery toUpdate = repository.findById(id).orElse(null);
 
