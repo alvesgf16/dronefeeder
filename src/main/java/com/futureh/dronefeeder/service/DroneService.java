@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.futureh.dronefeeder.dto.DroneDto;
 import com.futureh.dronefeeder.model.Delivery;
 import com.futureh.dronefeeder.model.Drone;
 import com.futureh.dronefeeder.repository.DroneRepository;
@@ -30,7 +31,7 @@ public class DroneService {
   }
 
   @Transactional
-  public Drone updateLocalization(int id, Drone drone) {
+  public Drone updateLocalization(int id, DroneDto drone) {
     Drone droneToSave = repository.findById(id).orElse(null);
 
     droneToSave.setLatitude(drone.getLatitude());
@@ -40,8 +41,10 @@ public class DroneService {
   }
 
   @Transactional
-  public Drone addDelivery(Integer id, Delivery delivery) {
+  public Drone addDelivery(Integer id) {
     Drone drone = findById(id);
+
+    Delivery delivery = new Delivery();
 
     delivery.setDrone(drone);
     drone.addDelivery(delivery);
