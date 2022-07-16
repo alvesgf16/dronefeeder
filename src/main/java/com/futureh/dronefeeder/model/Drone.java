@@ -1,5 +1,6 @@
 package com.futureh.dronefeeder.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,20 +14,34 @@ import javax.persistence.OneToMany;
 public class Drone {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long id;
+  private Integer id;
 
   private String latitude;
 
   private String longitude;
 
   @OneToMany(mappedBy = "drone", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<Delivery> deliveries;
+  private List<Delivery> deliveries = new ArrayList<Delivery>();
 
-  public Long getId() {
+  /**
+   * Construtor da classe.
+   */
+  public Drone() {}
+
+  /**
+   * Construtor da classe especificando os atributos necessários para criação de uma entidade.
+   * 
+   */
+  public Drone(String latitude, String longitude) {
+    this.latitude = latitude;
+    this.longitude = longitude;
+  }
+
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -52,5 +67,9 @@ public class Drone {
 
   public void setDeliveries(List<Delivery> deliveries) {
     this.deliveries = deliveries;
+  }
+
+  public void addDelivery(Delivery delivery) {
+    deliveries.add(delivery);
   }
 }
