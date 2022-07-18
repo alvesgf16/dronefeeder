@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.*;
 
 import com.futureh.dronefeeder.dto.DeliveryDto;
 import com.futureh.dronefeeder.model.Delivery;
-import com.futureh.dronefeeder.service.DeliveryService;
+import com.futureh.dronefeeder.service.DeliveryServiceImpl;
 
 @RestController
 @RequestMapping("delivery")
 public class DeliveryController {
   @Autowired
-  DeliveryService service;
+  DeliveryServiceImpl service;
 
   @GetMapping
   public ResponseEntity<List<Delivery>> list() {
