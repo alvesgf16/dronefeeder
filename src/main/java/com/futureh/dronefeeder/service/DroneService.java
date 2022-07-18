@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface DroneService {
 
+  Drone create(Drone drone);
   List<Drone> list();
 
   Drone findById(int id);
