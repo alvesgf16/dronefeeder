@@ -1,5 +1,7 @@
 package com.futureh.dronefeeder.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDateTime;
 
 import javax.persistence.*;
@@ -21,6 +23,7 @@ public class Delivery {
 
   @JoinColumn(name = "video_id")
   @OneToOne
+  @JsonIgnore
   private Video video;
 
   /**
@@ -73,5 +76,17 @@ public class Delivery {
 
   public void setDrone(Drone drone) {
     this.drone = drone;
+  }
+
+  public Drone getDrone() {
+    return drone;
+  }
+
+  public Video getVideo() {
+    return video;
+  }
+
+  public void setVideo(Video video) {
+    this.video = video;
   }
 }
