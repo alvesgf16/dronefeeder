@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.futureh.dronefeeder.dto.DroneDto;
 import com.futureh.dronefeeder.model.Delivery;
 import com.futureh.dronefeeder.model.Drone;
-import com.futureh.dronefeeder.service.DroneService;
+import com.futureh.dronefeeder.service.DroneServiceImpl;
 
 @RestController
 @RequestMapping("drone")
 public class DroneController {
   @Autowired
-  DroneService service;
+  DroneServiceImpl service;
 
   @PostMapping
   public ResponseEntity<Drone> create(@RequestBody Drone drone) {
