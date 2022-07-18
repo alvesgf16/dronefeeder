@@ -17,9 +17,8 @@ public class Video {
   @Lob
   private byte[] data;
 
-  public Video(byte[] data, String descricao) {
+  public Video(byte[] data) {
     this.data = data;
-    this.descricao = descricao;
   }
 
   public Video() {
