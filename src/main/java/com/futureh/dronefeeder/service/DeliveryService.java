@@ -1,49 +1,19 @@
 package com.futureh.dronefeeder.service;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.futureh.dronefeeder.dto.DeliveryDto;
 import com.futureh.dronefeeder.model.Delivery;
-import com.futureh.dronefeeder.repository.DeliveryRepository;
 
-@Service
-public class DeliveryService {
-  @Autowired
-  private DeliveryRepository repository;
+import java.util.List;
 
-  public List<Delivery> list() {
-    return repository.findAll();
-  }
+public interface DeliveryService {
 
-  public Delivery findById(int id) {
-    return repository.findById(id).orElse(null);
-  }
+  List<Delivery> list();
 
-  @Transactional
-  public Delivery create(Delivery delivery) {
-    return repository.save(delivery);
-  }
+  Delivery findById(int id);
 
-  @Transactional
-  public Delivery update(int id, DeliveryDto delivery) {
-    Delivery toUpdate = repository.findById(id).orElse(null);
+  Delivery create(Delivery delivery);
 
-    toUpdate.setDeliveryTime(LocalDateTime.now());
-    toUpdate.setStatus(delivery.getStatus());
+  Delivery update(int id, DeliveryDto delivery);
 
-    return repository.save(toUpdate);
-  }
-
-  @Transactional
-  public void delete(int id) {
-    Delivery deliveryToDelete = repository.findById(id).orElse(null);
-    repository.delete(deliveryToDelete);
-  }
-
+  void delete(int id);
 }
