@@ -1,66 +1,22 @@
 package com.futureh.dronefeeder.service;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.futureh.dronefeeder.dto.DroneDto;
 import com.futureh.dronefeeder.model.Delivery;
 import com.futureh.dronefeeder.model.Drone;
-import com.futureh.dronefeeder.repository.DroneRepository;
 
-@Service
-public class DroneService {
-  @Autowired
-  private DroneRepository repository;
+import java.util.List;
 
-  @Transactional
-  public Drone create(Drone drone) {
-    return repository.save(drone);
-  }
+public interface DroneService {
 
-  public List<Drone> list() {
-    return repository.findAll();
-  }
+  List<Drone> list();
 
-  public Drone findById(int id) {
-    return repository.findById(id).orElse(null);
-  }
+  Drone findById(int id);
 
-  @Transactional
-  public Drone updateLocalization(int id, DroneDto drone) {
-    Drone droneToSave = repository.findById(id).orElse(null);
+  Drone updateLocalization(int id, DroneDto drone);
 
-    droneToSave.setLatitude(drone.getLatitude());
-    droneToSave.setLongitude(drone.getLongitude());
+  Drone addDelivery(Integer id);
 
-    return repository.save(droneToSave);
-  }
+  List<Delivery> listDeliveries(Integer id);
 
-  @Transactional
-  public Drone addDelivery(Integer id) {
-    Drone drone = findById(id);
-
-    Delivery delivery = new Delivery();
-
-    delivery.setDrone(drone);
-    drone.addDelivery(delivery);
-
-    return repository.save(drone);
-  }
-
-  public List<Delivery> listDeliveries(Integer id) {
-    Drone drone = findById(id);
-
-    return drone.getDeliveries();
-  }
-
-  @Transactional
-  public void delete(int id) {
-    Drone droneToDelete = repository.findById(id).orElse(null);
-    repository.delete(droneToDelete);
-  }
+  void delete(int id);
 }
