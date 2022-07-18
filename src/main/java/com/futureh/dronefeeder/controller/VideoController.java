@@ -1,14 +1,14 @@
 package com.futureh.dronefeeder.controller;
 
-import com.futureh.dronefeeder.model.Video;
-import com.futureh.dronefeeder.service.VideoService;
+import com.futureh.dronefeeder.result.VideoGetAllResult;
+import com.futureh.dronefeeder.service.VideoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.List;
 
@@ -16,24 +16,29 @@ import java.util.List;
 @RequestMapping("/video")
 public class VideoController {
   @Autowired
-  VideoService service;
+  VideoServiceImpl service;
 
-  @PostMapping()
-  public ResponseEntity<String> saveVideo(@RequestParam("file") MultipartFile file, @RequestParam String descricao) throws IOException {
-    service.saveVideo(file, descricao);
-    return ResponseEntity.ok("video criado com sucesso, descricao: " + descricao );
+  @PostMapping("/{delivery_id}")
+  public ResponseEntity<String> saveVideo(@RequestParam("file") MultipartFile file, @PathVariable("delivery_id") Integer deliveryId ) throws IOException {
+    service.saveVideo(file, deliveryId);
+    return ResponseEntity.ok("video criado com sucesso"  );
   }
 
-  @GetMapping("/{descricao}")
-  public ResponseEntity<ByteArrayResource> getVideoById(@PathVariable("id") String descricao) {
-    ByteArrayResource byteVideo = new ByteArrayResource(service.getVideoByDescricao(descricao).getData());
+  @GetMapping("/{video_id}")
+  public HttpEntity<byte[]> getVideoById(@PathVariable("video_id") Integer id) {
+    byte[] byteVideo = service.getVideoById(id).getData();
 
-    return ResponseEntity.ok(byteVideo);
+    HttpHeaders header = new HttpHeaders();
+
+    header.add("Content-Disposition", "attachment;filename=\"delivery.mp4\"");
+
+    HttpEntity<byte[]> result = new HttpEntity<>(byteVideo, header);
+
+    return result;
   }
 
   @GetMapping()
-  public ResponseEntity<List<String>> getAllVideoNames(){
-    System.out.print(service.getAll());
+  public ResponseEntity<List<VideoGetAllResult>> getAllVideoNames(){
     return ResponseEntity
         .ok(service.getAll());
   }
