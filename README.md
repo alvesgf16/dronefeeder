@@ -1,6 +1,7 @@
 # Java Dronefeeder Spring API
 
 Uma API feita em Java, utilizando Spring, Junit, Docker, MySQL entre outros.
+Projeto final da aceleração em Java da empresa Wipro.
 
 ## Instalação e colocando para rodar
 ```bash
