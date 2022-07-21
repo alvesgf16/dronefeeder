@@ -1,5 +1,7 @@
 package com.futureh.dronefeeder.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +23,7 @@ public class Drone {
   private String longitude;
 
   @OneToMany(mappedBy = "drone", cascade = CascadeType.ALL, orphanRemoval = true)
+  @JsonManagedReference
   private List<Delivery> deliveries = new ArrayList<Delivery>();
 
   /**

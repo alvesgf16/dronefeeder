@@ -1,7 +1,5 @@
 package com.futureh.dronefeeder.result;
 
-import java.time.LocalDateTime;
-
 public class VideoGetAllResult {
 
   private Integer deliveryId;
@@ -10,7 +8,12 @@ public class VideoGetAllResult {
 
   private Integer videoId;
 
-  public static VideoGetAllResult VideoResult(Integer deliveryId, String deliveryTime, Integer videoId) {
+  /**
+   * Método construtor estático da classe.
+   *
+   */
+  public static VideoGetAllResult videoResult(Integer deliveryId, String deliveryTime,
+      Integer videoId) {
     VideoGetAllResult result = new VideoGetAllResult();
     result.setDeliveryId(deliveryId);
     result.setDeliveryTime(deliveryTime);
