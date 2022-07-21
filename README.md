@@ -82,7 +82,7 @@ Projeto em grupo de conclusão da aceleração em Java da empresa Wipro.
 ### /video/:video_id
 * `GET`: Retorna um video pelo id
 
-```
+
 
 ## ENTIDADES E RELACIONAMENTOS
 
