@@ -25,7 +25,12 @@ Projeto em grupo de conclusão da aceleração em Java da empresa Wipro.
 |     |     ├── model
 |     |     |     ├── Delivery.java
 |     |     |     ├── Drone.java
-|     |     |     └── Video.java       
+|     |     |     └── Video.java
+|     |     ├── exception
+|     |     |     ├── DataError
+|     |     |     ├── DroneControllerAdvisor
+|     |     |     ├── DroneNotFoundException
+|     |     |     └── UnexpectedErrorException
 |     |     ├── repository
 |     |     |     ├── DeliveryRepository.java
 |     |     |     ├── DroneRepository.java
@@ -40,21 +45,22 @@ Projeto em grupo de conclusão da aceleração em Java da empresa Wipro.
 |     |     |     ├── VideoService.java
 |     |     |     └── VideoServiceImpl.java
 |     |     ├── DroneFeederApplication.java
-|     └── tests/dronefeeder
-|     |     └── DronefeederApplicationTests.java
+|     ├── tests/dronefeeder
+|     |     ├── controller
+|     |     |     └── DroneControllerTest
+            └── DronefeederApplicationTests.java
 
 ```
 
 ## API
 
-#### /delivery
+#### /deliveries
 * `GET` : Retorna todos deliveries
 * `GET:ID`: Retorna delivery por id
-* `POST`: Cria um delivery
-* `PUT`: Atualiza um delivery
+* `PUT`: Atualiza o status de um delivery
 * `DELETE`: Deleta um delivery
 
-#### /drone
+#### /drones
 * `GET` : Retorna todos drones
 * `GET:ID`: Retorna drone por id
 * `POST`: Cria um drone
@@ -63,18 +69,25 @@ Projeto em grupo de conclusão da aceleração em Java da empresa Wipro.
 #### /drone/:id/localization
 * `PATCH` : Atualiza a localizacao de um drone
 
-### /video
-* `GET` : Retorna todos drones utiliznado a classe "VideoGetAllResult", retorna o id da entrega, a data da entrega e o id de cada video.
-
 #### /drone/:id/deliveries
-* `PATCH` : Adiciona uma delivery ao drone
-* `GET` : Retorna todos deliveries de um drone
+* `POST` : Adiciona uma nova delivery a um drone
+* `GET` : Lista as deliveries de um drone
+
+### /videos
+* `GET` : Retorna todos drones utiliznado a classe "VideoGetAllResult", retorna o id da entrega, a data da entrega e o id de cada video.
 
 ### /video/:delivery_id
 * `POST`: Cria um video e associa a uma entrega
 
 ### /video/:video_id
 * `GET`: Retorna um video pelo id
+
+```
+
+## ENTIDADES E RELACIONAMENTOS
+
+
+![Captura de tela de 2022-07-21 10-13-19](https://user-images.githubusercontent.com/87549369/180222198-a27cbd83-3204-4269-95fe-0a9e38f81f97.png)
 
 
 
