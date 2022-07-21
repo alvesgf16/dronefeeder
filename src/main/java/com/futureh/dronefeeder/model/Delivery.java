@@ -1,10 +1,18 @@
 package com.futureh.dronefeeder.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Delivery {
@@ -13,12 +21,13 @@ public class Delivery {
   private Integer id;
 
   @Column(name = "delivery_time")
-  private LocalDateTime deliveryTime;
+  private String deliveryTime;
 
   private String status;
 
   @ManyToOne
   @JoinColumn(name = "drone_id")
+  @JsonBackReference
   private Drone drone;
 
   @JoinColumn(name = "video_id")
@@ -31,19 +40,15 @@ public class Delivery {
    *
    */
   public Delivery() {
-    this.deliveryTime = LocalDateTime.now();
+    this.deliveryTime = LocalDateTime.now().toString();
     this.status = "PENDENTE";
   }
 
   /**
    * Construtor da classe especificando todos os atributos.
    * 
-   * @param id o identificador do episódio
-   * @param numero o número do episódio dentro da série
-   * @param duracaoEmMinutos a duração, em minutos, do episódio
-   * @param serie a série à qual o episódio pertence
    */
-  public Delivery(Integer id, LocalDateTime deliveryTime, String status, Drone drone) {
+  public Delivery(Integer id, String deliveryTime, String status, Drone drone) {
     this.id = id;
     this.deliveryTime = deliveryTime;
     this.status = status;
@@ -58,11 +63,11 @@ public class Delivery {
     this.id = id;
   }
 
-  public LocalDateTime getDeliveryTime() {
+  public String getDeliveryTime() {
     return deliveryTime;
   }
 
-  public void setDeliveryTime(LocalDateTime deliveryTime) {
+  public void setDeliveryTime(String deliveryTime) {
     this.deliveryTime = deliveryTime;
   }
 
