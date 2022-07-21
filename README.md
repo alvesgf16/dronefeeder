@@ -44,9 +44,9 @@ Projeto em grupo de conclusão da aceleração em Java da empresa Wipro.
       |     |     ├── DroneServiceImpl.java
       |     |     ├── VideoService.java
       |     |     └── VideoServiceImpl.java
-      |     ├── DroneFeederApplication.java
+      |     └── DroneFeederApplication.java
       ├── tests/dronefeeder
-      ├── controller
+      └── controller
             └── DroneControllerTest
             └── DronefeederApplicationTests.java
 
